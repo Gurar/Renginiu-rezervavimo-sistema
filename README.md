@@ -8,14 +8,13 @@ The project is designed for event management and participant registration. The s
 - Event creation and management
 - Event reservation system
 - RESTful API architecture
-- Swagger/OpenAPI documentation
+- Swagger documentation
 - Unit and BDD testing
 # 🧰 Technologies Used
 ## Backend
 - Java 25
 - Spring Boot
 - Hibernate / JPA
-- PostgreSQL
 ## Frontend
 - HTML5
 - CSS3
