@@ -7,9 +7,6 @@ The project is designed for event management and participant registration. The s
 - User registration and login
 - Event creation and management
 - Event reservation system
-- RESTful API architecture
-- Swagger documentation
-- Unit and BDD testing
 # 🧰 Technologies Used
 ## Backend
 - Java 25
