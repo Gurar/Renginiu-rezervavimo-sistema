@@ -9,13 +9,11 @@ The project is designed for event management and participant registration. The s
 - Event reservation system
 # 🧰 Technologies Used
 ## Backend
-- Java 25
+- Java 21
 - Spring Boot
 - Hibernate / JPA
 ## Frontend
-- HTML5
-- CSS3
-- JavaScript
+- React
 ## 😃 Authors
 Kirill Korobov programotojas + SA
 Jezy Kozlovski programotojas + QA
