@@ -1,4 +1,4 @@
 package lt.viko.eif.eventsystem.security;
 
-public class JWTAuthEntryPoint {
+public class JwtAuthTokenFilter {
 }
