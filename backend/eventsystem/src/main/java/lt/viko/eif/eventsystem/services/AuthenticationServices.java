@@ -1,7 +1,10 @@
 package lt.viko.eif.eventsystem.services;
 
+import jakarta.ws.rs.core.Response;
 import lt.viko.eif.eventsystem.db.UserCredentialRepository;
 import lt.viko.eif.eventsystem.db.UserRepository;
+import lt.viko.eif.eventsystem.dto.SigninRequest;
+import lt.viko.eif.eventsystem.dto.SigninResponse;
 import lt.viko.eif.eventsystem.dto.SignupRequest;
 import lt.viko.eif.eventsystem.exception.CustomException;
 import lt.viko.eif.eventsystem.mapper.AuthMapper;
@@ -11,9 +14,12 @@ import lt.viko.eif.eventsystem.dto.SignupResponse;
 import lt.viko.eif.eventsystem.security.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class AuthenticationServices {
@@ -78,5 +84,22 @@ public class AuthenticationServices {
         userRepository.save(user);
 
         return authMapper.toSignupResponse(newUserCredential);
+    }
+
+    public SigninResponse authenticateUser (SigninRequest signinRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(
+                        signinRequest.getUsername(),
+                        signinRequest.getPassword()
+                )
+        );
+
+        final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String token = jwtUtil.generateToken(userDetails.getUsername());
+
+        UserCredential userCredential = userCredentialRepository.findByUsername(userDetails.getUsername()).orElseThrow();
+
+        return authMapper.toSigninResponse(userCredential,token);
     }
 }
