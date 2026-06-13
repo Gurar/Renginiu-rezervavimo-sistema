@@ -27,13 +27,13 @@ public class EventService {
 
     public List<EventResponse> getEvents() {
         if ( cachedEvents != null && lastFetchTime != null && lastFetchTime.plusMinutes(5).isAfter(LocalDateTime.now()) )
-            return cachedEvents.getEmbedded().getEvents().stream().map(eventMapper::toResponse).toList();
+            return cachedEvents.getEmbedded().getEvents().stream().map(eventMapper::toEventResponse).toList();
 
         cachedEvents = ticketmasterClient.getEvents();
 
         lastFetchTime = LocalDateTime.now();
 
-        return cachedEvents.getEmbedded().getEvents().stream().map(eventMapper::toResponse).toList();
+        return cachedEvents.getEmbedded().getEvents().stream().map(eventMapper::toEventResponse).toList();
     }
 
     public TicketmasterResponse getEventsAll() {

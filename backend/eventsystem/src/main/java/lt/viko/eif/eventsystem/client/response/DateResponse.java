@@ -10,4 +10,5 @@ public class DateResponse {
     public void setStart(StartResponse star) {
         this.start = star;
     }
+
 }

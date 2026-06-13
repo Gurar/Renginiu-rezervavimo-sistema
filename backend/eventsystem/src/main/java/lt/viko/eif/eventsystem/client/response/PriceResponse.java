@@ -18,4 +18,16 @@ public class PriceResponse {
     public String getCurrency() {
         return currency;
     }
+
+    public void setMin(Double min) {
+        this.min = min;
+    }
+
+    public void setMax(Double max) {
+        this.max = max;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

@@ -12,4 +12,12 @@ public class VenueResponse {
     public CountryResponse getCountry() {
         return country;
     }
+
+    public void setAddress(AddressResponse address) {
+        this.address = address;
+    }
+
+    public void setCountry(CountryResponse country) {
+        this.country = country;
+    }
 }

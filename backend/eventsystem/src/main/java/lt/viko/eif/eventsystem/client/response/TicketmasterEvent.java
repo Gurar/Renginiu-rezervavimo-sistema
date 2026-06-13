@@ -42,4 +42,31 @@ public class TicketmasterEvent {
         return _embedded;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setImages(List<ImageResponse> images) {
+        this.images = images;
+    }
+
+    public void setDates(DateResponse dates) {
+        this.dates = dates;
+    }
+
+    public void setPriceRanges(List<PriceResponse> priceRanges) {
+        this.priceRanges = priceRanges;
+    }
+
+    public void set_embedded(VenueEmbeddedResponse _embedded) {
+        this._embedded = _embedded;
+    }
 }
