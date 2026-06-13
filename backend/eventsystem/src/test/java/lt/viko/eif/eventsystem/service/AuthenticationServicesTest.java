@@ -56,25 +56,17 @@ public class AuthenticationServicesTest {
     void shouldSavesUserAndReturnResponse() {
         SignupRequest request = buildSignupRequest();
 
-        when(
-                userCredentialRepository .existsByUsername("admin")
-        ).thenReturn(false);
+        when(userCredentialRepository .existsByUsername("admin")).thenReturn(false);
 
-        when(
-                userRepository .existsByEmail("john@test.com")
-        ).thenReturn(false);
+        when(userRepository .existsByEmail("john@test.com")).thenReturn(false);
 
-        when(
-                encoder.encode("1234")
-        ).thenReturn("encoded-password");
+        when(encoder.encode("1234")).thenReturn("encoded-password");
 
         SignupResponse signupResponse = new SignupResponse();
 
         signupResponse.setUserId(1L);
 
-        when(
-                authMapper.toSignupResponse( any(UserCredential.class) )
-        ).thenReturn(signupResponse);
+        when(authMapper.toSignupResponse( any(UserCredential.class) )).thenReturn(signupResponse);
 
         SignupResponse response = authenticationServices .registerUser(request);
 
