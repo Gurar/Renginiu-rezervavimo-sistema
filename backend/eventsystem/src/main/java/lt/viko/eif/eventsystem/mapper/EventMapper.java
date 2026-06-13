@@ -10,7 +10,7 @@ import java.util.Map;
 public class EventMapper {
 
 
-    public EventResponse toResponse(TicketmasterEvent event) {
+    public EventResponse toEventResponse(TicketmasterEvent event) {
         EventResponse eventResponse = new EventResponse();
         eventResponse.setId(event.getId());
         eventResponse.setTitle(event.getName());

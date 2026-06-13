@@ -12,4 +12,12 @@ public class StartResponse {
     public String getLocalTime() {
         return localTime;
     }
+
+    public void setLocalDate(String localDate) {
+        this.localDate = localDate;
+    }
+
+    public void setLocalTime(String localTime) {
+        this.localTime = localTime;
+    }
 }
