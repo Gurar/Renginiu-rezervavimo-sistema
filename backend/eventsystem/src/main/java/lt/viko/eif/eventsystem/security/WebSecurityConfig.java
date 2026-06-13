@@ -1,6 +1,6 @@
 package lt.viko.eif.eventsystem.security;
 
-import lt.viko.eif.eventsystem.services.CustomUserDetailsService;
+import lt.viko.eif.eventsystem.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

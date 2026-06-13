@@ -9,10 +9,8 @@ import jakarta.ws.rs.core.Response;
 import lt.viko.eif.eventsystem.dto.SigninRequest;
 import lt.viko.eif.eventsystem.dto.SigninResponse;
 import lt.viko.eif.eventsystem.dto.SignupRequest;
-import lt.viko.eif.eventsystem.exception.CustomException;
-import lt.viko.eif.eventsystem.model.UserCredential;
 import lt.viko.eif.eventsystem.dto.SignupResponse;
-import lt.viko.eif.eventsystem.services.AuthenticationServices;
+import lt.viko.eif.eventsystem.service.AuthenticationServices;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +31,8 @@ public class AuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerUser(SignupRequest signupRequest) {
       SignupResponse response = authenticationServices.registerUser(signupRequest);
-      return Response.ok(response).build();
+      return Response.status(Response.Status.CREATED).
+              entity(response).build();
     }
 
     @POST
@@ -41,7 +40,8 @@ public class AuthenticationResource {
     public Response authenticateUser(SigninRequest signinRequest) {
         try {
             SigninResponse response = authenticationServices.authenticateUser(signinRequest);
-            return Response.ok(response).build();
+            return Response.status(Response.Status.CREATED).
+                    entity(response).build();
         } catch (AuthenticationException e) {
             return Response
                     .status(Response.Status.UNAUTHORIZED)

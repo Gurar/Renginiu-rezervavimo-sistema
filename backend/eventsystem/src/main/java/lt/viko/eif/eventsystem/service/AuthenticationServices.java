@@ -1,6 +1,5 @@
-package lt.viko.eif.eventsystem.services;
+package lt.viko.eif.eventsystem.service;
 
-import jakarta.ws.rs.core.Response;
 import lt.viko.eif.eventsystem.db.UserCredentialRepository;
 import lt.viko.eif.eventsystem.db.UserRepository;
 import lt.viko.eif.eventsystem.dto.SigninRequest;
@@ -14,12 +13,9 @@ import lt.viko.eif.eventsystem.dto.SignupResponse;
 import lt.viko.eif.eventsystem.security.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class AuthenticationServices {

@@ -1,4 +1,4 @@
-package lt.viko.eif.eventsystem.services;
+package lt.viko.eif.eventsystem.service;
 
 import lt.viko.eif.eventsystem.db.UserCredentialRepository;
 import lt.viko.eif.eventsystem.model.UserCredential;
@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
