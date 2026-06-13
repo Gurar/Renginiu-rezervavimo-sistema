@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @ApplicationPath("/")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-        packages("lt.viko.eif.eventsystem.resource");
+        packages(
+                "lt.viko.eif.eventsystem.resource",
+                "lt.viko.eif.eventsystem.mapper"
+        );
+
+
     }
 }
