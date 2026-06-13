@@ -1,4 +1,4 @@
-package lt.viko.eif.eventsystem.services;
+package lt.viko.eif.eventsystem.service;
 
 import lt.viko.eif.eventsystem.db.UserCredentialRepository;
 import lt.viko.eif.eventsystem.model.UserCredential;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.matchers.Equality;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
