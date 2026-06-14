@@ -1,18 +1,16 @@
 package lt.viko.eif.eventsystem.resource;
 
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lt.viko.eif.eventsystem.dto.SigninRequest;
-import lt.viko.eif.eventsystem.dto.SigninResponse;
-import lt.viko.eif.eventsystem.dto.SignupRequest;
-import lt.viko.eif.eventsystem.dto.SignupResponse;
+import lt.viko.eif.eventsystem.dto.*;
 import lt.viko.eif.eventsystem.service.AuthenticationServices;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
@@ -25,11 +23,22 @@ public class AuthenticationResource {
         this.authenticationServices = authenticationServices;
     }
 
+    @GET
+    public Response auth() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        AuthResponse response = new AuthResponse();
+
+        response.setUsername(username);
+
+        return Response.ok(response).build();
+    }
+
     @POST
     @Path("/signup")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response registerUser(SignupRequest signupRequest) {
+    public Response registerUser(@Valid SignupRequest signupRequest) {
       SignupResponse response = authenticationServices.registerUser(signupRequest);
       return Response.status(Response.Status.CREATED).
               entity(response).build();

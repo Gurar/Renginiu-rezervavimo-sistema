@@ -1,14 +1,16 @@
 package lt.viko.eif.eventsystem.client;
 
+import lt.viko.eif.eventsystem.client.response.TicketmasterEvent;
 import lt.viko.eif.eventsystem.client.response.TicketmasterResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class TicketmasterClient {
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
 
     @Value("${ticketmaster.api.key}")
     private String apiKey;
@@ -16,26 +18,50 @@ public class TicketmasterClient {
     @Value("${ticketmaster.root.url}")
     private String rootUrl;
 
-    public TicketmasterClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public TicketmasterClient(RestClient restClient) {
+
+        this.restClient = restClient;
     }
 
     public TicketmasterResponse getEvents() {
 
-//        String url = rootUrl + "/events.json" + "?apikey=" + apiKey + "&size=50" + "&segmentName=Music";
-        String url = rootUrl +
-                "/events.json" +
-                "?apikey=" + apiKey +
-                "&size=25" +
-                "&segmentName=Music" +
-                "&countryCode=US" +
-                "&includeTBA=no" +
-                "&includeTBD=no" +
-                "&sort=date,asc";
-
 
         try {
-            return restTemplate.getForObject( url, TicketmasterResponse.class );
+            return restClient
+                    .get()
+                    .uri(
+                            rootUrl
+                            + "/events.json?apikey="
+                            + apiKey
+                            + "&size=100"
+                            + "&segmentName=Music"
+                            + "&countryCode=US"
+                            + "&sort=date,asc"
+
+                    )
+                    .retrieve()
+                    .body(TicketmasterResponse.class);
+
+        } catch (RestClientException e) {
+            throw new RestClientException("Nepavyko gauti duomenų iš Ticketmaster API", e);
+        }
+    }
+
+    public TicketmasterEvent getEventById( String eventId) {
+        try {
+            return restClient
+                    .get()
+                    .uri(
+                            rootUrl
+                            + "/events/"
+                            + eventId
+                            + ".json?apikey="
+                            + apiKey
+
+                    )
+                    .retrieve()
+                    .body(TicketmasterEvent.class);
+
         } catch (RestClientException e) {
             throw new RestClientException("Nepavyko gauti duomenų iš Ticketmaster API", e);
         }
