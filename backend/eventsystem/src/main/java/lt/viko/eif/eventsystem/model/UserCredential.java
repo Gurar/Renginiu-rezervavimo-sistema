@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users_credential" )
 public class UserCredential extends BaseEntity {
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 
     @Column(unique = true)

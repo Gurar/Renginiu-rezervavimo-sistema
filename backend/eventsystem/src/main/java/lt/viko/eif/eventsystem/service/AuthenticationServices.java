@@ -64,20 +64,22 @@ public class AuthenticationServices {
         if (userRepository.existsByEmail(signupRequest.getEmail()))
             throw new CustomException("Email already exists");
 
+        User user = new User();
+
+        user.setFirst_name(signupRequest.getFirstName());
+
+        user.setLast_name(signupRequest.getLastName());
+
+        user.setEmail(signupRequest.getEmail());
+
+        user = userRepository.save(user);
+
         UserCredential newUserCredential = new UserCredential(
-                null, signupRequest.getUsername(),
+                user, signupRequest.getUsername(),
                 encoder.encode(signupRequest.getPassword())
         );
 
         userCredentialRepository.save(newUserCredential);
-
-        User user = new User();
-
-        user.setFirst_name(signupRequest.getFirstName());
-        user.setLast_name(signupRequest.getLastName());
-        user.setEmail(signupRequest.getEmail());
-
-        userRepository.save(user);
 
         return authMapper.toSignupResponse(newUserCredential);
     }
