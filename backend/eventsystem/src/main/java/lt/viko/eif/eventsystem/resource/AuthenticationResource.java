@@ -51,7 +51,7 @@ public class AuthenticationResource {
             return Response.ok().entity(response).build();
         } catch (AuthenticationException e) {
             return Response
-                    .status(Response.Status.UNAUTHORIZED)
+                    .status(Response.Status.BAD_REQUEST)
                     .entity(
                             Map.of( "message", "Invalid username or password" )
                     )
