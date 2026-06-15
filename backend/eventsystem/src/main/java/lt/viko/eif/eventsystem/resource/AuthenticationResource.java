@@ -6,15 +6,14 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lt.viko.eif.eventsystem.dto.*;
 import lt.viko.eif.eventsystem.service.AuthenticationServices;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
+
 
 import java.util.Map;
 
-@Path("/api/auth")
+@Path("/auth")
 @Component
 public class AuthenticationResource {
     private final AuthenticationServices authenticationServices;
@@ -49,11 +48,10 @@ public class AuthenticationResource {
     public Response authenticateUser(SigninRequest signinRequest) {
         try {
             SigninResponse response = authenticationServices.authenticateUser(signinRequest);
-            return Response.status(Response.Status.CREATED).
-                    entity(response).build();
+            return Response.ok().entity(response).build();
         } catch (AuthenticationException e) {
             return Response
-                    .status(Response.Status.UNAUTHORIZED)
+                    .status(Response.Status.BAD_REQUEST)
                     .entity(
                             Map.of( "message", "Invalid username or password" )
                     )

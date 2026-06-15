@@ -13,7 +13,7 @@ import lt.viko.eif.eventsystem.model.UserCredential;
 import lt.viko.eif.eventsystem.service.ReservationService;
 import org.springframework.stereotype.Component;
 
-@Path("/api/reservation")
+@Path("/reservation")
 @Component
 public class ReservationResource {
 

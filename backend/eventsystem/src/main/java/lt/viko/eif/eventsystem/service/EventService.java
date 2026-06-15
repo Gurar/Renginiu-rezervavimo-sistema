@@ -35,4 +35,15 @@ public class EventService {
 
         return cachedEvents.getEmbedded().getEvents().stream().map(eventMapper::toEventResponse).toList();
     }
+
+    public TicketmasterResponse getEventsAll() {
+        if ( cachedEvents != null && lastFetchTime != null && lastFetchTime.plusMinutes(5).isAfter(LocalDateTime.now()) )
+            return cachedEvents;
+
+        cachedEvents = ticketmasterClient.getEvents();
+
+        lastFetchTime = LocalDateTime.now();
+
+        return cachedEvents;
+    }
 }

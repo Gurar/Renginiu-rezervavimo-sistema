@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Path("/api/events")
+@Path("/events")
 @Component
 public class EventResource {
     private final EventService eventService;
